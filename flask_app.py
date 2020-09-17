@@ -1,5 +1,9 @@
 import MySQLdb
 from flask import Flask, redirect, render_template, request
+db_host = "nardika.mysql.pythonanywhere-services.com"
+db_user = "nardika"
+db_password = ""
+db_database = "nardika$default"
 app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
@@ -9,7 +13,7 @@ def index():
 
 @app.route('/users')
 def showusers():
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "SELECT id, username FROM users"
     cursor.execute(sql)
@@ -19,7 +23,7 @@ def showusers():
 
 @app.route('/profile/<name>')
 def profile(name):
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "SELECT id, username, age, city, DOB, gender FROM users WHERE username = '%s'" % name
     cursor.execute(sql)
@@ -29,7 +33,7 @@ def profile(name):
 
 @app.route('/users/add',methods =['POST'])
 def add_user():
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "INSERT INTO users (username) Values ('%s')" % request.form['username']
     try:
@@ -45,7 +49,7 @@ def add_user():
 
 @app.route('/users/delete',methods =['POST'])
 def delete_user():
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "DELETE FROM users WHERE username ='%s'" % request.form['user']
     try:
@@ -61,7 +65,7 @@ def delete_user():
 
 @app.route('/users/delete/<id>',methods =['GET'])
 def delete_user2(id):
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "DELETE FROM users WHERE id = %s" % id
     try:
@@ -77,7 +81,7 @@ def delete_user2(id):
 
 @app.route('/users/update',methods =['POST'])
 def update_user():
-    db = MySQLdb.connect("nardika.mysql.pythonanywhere-services.com","nardika","nicholas#2020","nardika$default")
+    db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "UPDATE users SET username = '%s', age = '%s', city = '%s', dob = '%s', gender = '%s' WHERE username = '%s' " % (request.form['name'], request.form['age'], request.form['city'], request.form['dob'], request.form['gender'], request.form['name'])
 
