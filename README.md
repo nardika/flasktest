@@ -33,3 +33,7 @@ We recommend the use of pip virtual environment to install the required python p
 ## Contributions
 
 Feel free to submit changes and issues on this github repository
+
+## Thanks
+
+Thanks to pythonanywhere.com for providing a great online IDE :)
