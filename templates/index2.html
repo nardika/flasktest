@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    <style>
+        table, th{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    </head>
+    <body>
+        <form action="/users/add" method="POST">
+            <label>First name: </label>
+            <input type="text" name="username">
+            <input type="submit" value="Submit"/>
+        </form>
+        <form action="/users/delete" method="POST">
+            <label>Delete a user: </label>
+            <input type="text" name="user">
+            <input type="submit" value="Submit"/>
+        </form>
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        {% for member in members: %}
+        <tr>
+        <th>{{ member[0] }}</th>
+        <th><a href="https://nardika.pythonanywhere.com/profile/{{member[1]}}">{{ member[1] }}</a></th>
+        <th><a href="https://nardika.pythonanywhere.com/users/delete/{{member[0]}}">x</a></th>
+        </tr>
+        {% endfor %}
+        </table>
+        <form action="/users/update" method="POST">
+            <p><b>Update you info</b></p>
+            <label>Enter your username: </label>
+            <input type="text" name="name"><br>
+            <label>Enter your age: </label>
+            <input type="text" name="age"><br>
+            <label>Enter your city: </label>
+            <input type="text" name="city"><br>
+            <label>Enter your DOB: </label>
+            <input type="text" name="dob"><br>
+            <label>Enter your gender: </label>
+            <input type="text" name="gender"><br>
+            <input type="submit" value="Submit"/>
+        </form>
+    </body>
+</html>
