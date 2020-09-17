@@ -1,0 +1,4 @@
+# Comment this line for windows 10 as MySQLDb package must be installed manually from the wheel file (see readme)
+#MySQL-python
+
+flask

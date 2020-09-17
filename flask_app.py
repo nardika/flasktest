@@ -1,15 +1,16 @@
 import MySQLdb
 from flask import Flask, redirect, render_template, request
-db_host = "nardika.mysql.pythonanywhere-services.com"
-db_user = "nardika"
+
+db_host = "localhost"
+db_user = "root"
 db_password = ""
-db_database = "nardika$default"
+db_database = "test"
 app = Flask(__name__)
+
 @app.route('/')
 @app.route('/index')
 def index():
-    m = ['Rosalia', 'Adrianna', 'Victoria', 'James', 'Christoper']
-    return render_template('./index.html', title='Welcome', members=m)
+    return render_template('./index.html', title='Welcome')
 
 @app.route('/users')
 def showusers():
@@ -19,13 +20,14 @@ def showusers():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return render_template('./index2.html', title='Welcome', members=results)
+    return render_template('./users.html', title='Welcome', members=results)
 
 @app.route('/profile/<name>')
 def profile(name):
     db = MySQLdb.connect(db_host, db_user, db_password, db_database)
     cursor = db.cursor()
     sql = "SELECT id, username, age, city, DOB, gender FROM users WHERE username = '%s'" % name
+    print(sql)
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
@@ -96,7 +98,10 @@ def update_user():
     db.close()
     return redirect('/users')
 
-
+# Some cloud python IDE do not allow the following to be run , hence comment out this code if need be.
+if __name__ == "__main__":
+    app.run(debug=True)
+    pass
 
 
 

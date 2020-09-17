@@ -10,7 +10,7 @@
     </head>
     <body>
         <form action="/users/add" method="POST">
-            <label>First name: </label>
+            <label>Add new user: </label>
             <input type="text" name="username">
             <input type="submit" value="Submit"/>
         </form>
@@ -28,8 +28,8 @@
         {% for member in members: %}
         <tr>
         <th>{{ member[0] }}</th>
-        <th><a href="https://nardika.pythonanywhere.com/profile/{{member[1]}}">{{ member[1] }}</a></th>
-        <th><a href="https://nardika.pythonanywhere.com/users/delete/{{member[0]}}">x</a></th>
+        <th><a href="/profile/{{member[1]}}">{{ member[1] }}</a></th>
+        <th><a href="/users/delete/{{member[0]}}">x</a></th>
         </tr>
         {% endfor %}
         </table>
